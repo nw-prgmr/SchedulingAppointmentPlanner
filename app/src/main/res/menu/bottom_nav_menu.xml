@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:title="Task"
-        android:icon="@drawable/baseline_task_24"
+        android:icon="@drawable/task_selector"
         android:id="@+id/bnvTask" />
     <item android:title="Calendar"
-        android:icon="@drawable/baseline_calendar_month_24"
+        android:icon="@drawable/calendar_selector"
         android:id="@+id/bnvCalendar"/>
     <item android:title="Study Mode"
-        android:id="@+id/bnvStudy"/>
+        android:id="@+id/bnvStudy"
+        android:icon="@drawable/study_selector"/>
 </menu>
