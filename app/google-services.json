@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "519982062859",
+    "project_id": "schedulingappointplanner",
+    "storage_bucket": "schedulingappointplanner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519982062859:android:9b443829155e4abd62160e",
+        "android_client_info": {
+          "package_name": "com.antopina.schedulingappointmentplanner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR6KCyYVJdtPZru0VhUF8nnQFywWEm2u8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

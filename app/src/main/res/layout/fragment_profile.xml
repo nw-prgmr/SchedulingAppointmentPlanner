@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePage.HomePageFragments.ProfileFragment">
+
+    <!-- ScrollView to allow scrolling -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <!-- Custom Action Bar -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/burgundy">
+
+                <!-- Profile Title -->
+                <TextView
+                    android:id="@+id/tvProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profile"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:textStyle="bold"/>
+
+                <!-- Settings Icon -->
+                <ImageView
+                    android:id="@+id/ivSettings"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/settings"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="Settings"/>
+            </RelativeLayout>
+
+            <!-- Profile Information Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:padding="10dp">
+
+                <!-- Name and Email Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tvFullName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Full Name"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/black"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email Address"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/darker_gray"/>
+                </LinearLayout>
+
+                <!-- Profile Picture Column -->
+                <ImageView
+                    android:id="@+id/ivProfilePicture"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="end"
+                    android:padding="16dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/person"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Profile Picture"
+                    android:background="@drawable/circle_shape"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
