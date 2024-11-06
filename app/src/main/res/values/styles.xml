@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/burgundy</item>
+        <item name="colorPrimaryDark">@color/burgundy</item>
+        <item name="android:statusBarColor">@color/black</item> <!-- Set the status bar color -->
+    </style>
 
+    <!-- Custom theme for Settings activity with no padding at the top -->
+    <style name="AppTheme.NoPaddingActionBar" parent="AppTheme">
+        <!-- Ensures the activity is displayed normally without extra padding at the top -->
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item> <!-- Removes action bar shadow -->
+        <item name="android:windowActionBar">true</item> <!-- Ensures the action bar is shown -->
+    </style>
 </resources>

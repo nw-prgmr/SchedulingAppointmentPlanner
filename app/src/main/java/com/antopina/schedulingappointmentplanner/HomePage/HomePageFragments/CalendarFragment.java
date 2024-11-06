@@ -1,4 +1,4 @@
-package com.antopina.schedulingappointmentplanner;
+package com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.antopina.schedulingappointmentplanner.R;
 
 
 public class CalendarFragment extends Fragment {

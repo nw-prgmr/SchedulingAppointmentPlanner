@@ -11,4 +11,7 @@
     <item android:title="Study Mode"
         android:id="@+id/bnvStudy"
         android:icon="@drawable/study_selector"/>
+    <item android:title="Profile"
+        android:id="@+id/bnvProfile"
+        android:icon="@drawable/person"/>
 </menu>

@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="black25">#40000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bgwhite">#FFF</color>
+    <color name="bgwhite">#F8F9FA</color>
     <color name="gold">#E6CF00</color>
     <color name="inactive">#898888</color>
+    <color name="burgundy">#820021</color>
+    <color name="burgundy50">#80820021</color>
+    <color name="secondary_burgundy">#9A1543</color>
+    <color name="light_burgundy">#BD3275</color>
+    <color name="dark_pink">#E450A8</color>
+    <color name="light_pink">#FD65CA</color>
+    <color name="light_pink_50">#FF95B0</color>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.antopina.schedulingappointmentplanner;
+package com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments;
 
 import android.os.Bundle;
 
@@ -8,14 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.antopina.schedulingappointmentplanner.R;
 
-public class StudyFragment extends Fragment {
 
+public class TaskFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_study, container, false);
+        return inflater.inflate(R.layout.fragment_task, container, false);
     }
 }
