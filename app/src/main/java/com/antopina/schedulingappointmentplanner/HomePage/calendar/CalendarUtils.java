@@ -20,54 +20,65 @@ public class CalendarUtils {
         return time.format(formatter);
     }
 
+    public static String formattedShortTime(LocalTime time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return time.format(formatter);
+    }
+
     public static String monthYearFromDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyy");
         return date.format(formatter);
     }
 
-    public static ArrayList<LocalDate> daysInMonthArray(LocalDate date) {
+    public static String monthDayFromDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d");
+        return date.format(formatter);
+    }
+
+    public static ArrayList<LocalDate> daysInMonthArray() {
         ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
-        YearMonth yearMonth = YearMonth.from(date);
+
+        // Get YearMonth and details for the current, previous, and next months
+        YearMonth yearMonth = YearMonth.from(selectedDate);
+        YearMonth prevYearMonth = YearMonth.from(selectedDate.minusMonths(1));
+        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
 
         int daysInMonth = yearMonth.lengthOfMonth();
+        int prevMonthDays = prevYearMonth.lengthOfMonth();
+        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue(); // Monday = 1, Sunday = 7
 
-        LocalDate firstOfMonth = CalendarUtils.selectedDate.withDayOfMonth(1);
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
-
-        for (int i = 1; i <= 42; i++) {
-            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek)
-                daysInMonthArray.add(null);
-            else
-                daysInMonthArray.add(LocalDate.of(selectedDate.getYear(),selectedDate.getMonth(),i - dayOfWeek));
-
+        // Add previous month's days
+        for (int i = dayOfWeek - 1; i > 0; i--) {
+            daysInMonthArray.add(firstOfMonth.minusDays(i));
         }
+
+        // Add current month's days
+        for (int i = 1; i <= daysInMonth; i++) {
+            daysInMonthArray.add(LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), i));
+        }
+
+        // Add next month's days to fill remaining slots
+        int remainingDays = 42 - daysInMonthArray.size();
+        for (int i = 1; i <= remainingDays; i++) {
+            daysInMonthArray.add(firstOfMonth.plusDays(daysInMonthArray.size() - dayOfWeek + 1));
+        }
+
         return daysInMonthArray;
     }
 
+
     public static ArrayList<LocalDate> daysInWeekArray(LocalDate selectedDate) {
         ArrayList<LocalDate> days = new ArrayList<>();
-        LocalDate current = sundayForDate(selectedDate);
-        LocalDate endDate = current.plusWeeks(1);
-
-        while (current.isBefore(endDate)) {
-            days.add(current);
-            current = current.plusDays(1);
+        LocalDate startOfWeek = selectedDate.minusDays(selectedDate.getDayOfWeek().getValue() - 1); // Start on Monday
+        for (int i = 0; i < 7; i++) {
+            days.add(startOfWeek.plusDays(i));
         }
-
         return days;
     }
 
+
     private static LocalDate sundayForDate(LocalDate current) {
-        LocalDate oneWeekAgo = current.minusWeeks(1);
-
-        while (current.isAfter(oneWeekAgo)) {
-            if (current.getDayOfWeek() == DayOfWeek.SUNDAY)
-                return current;
-
-            current = current.minusDays(1);
-        }
-        return null;
+        return current.minusDays(current.getDayOfWeek().getValue() % 7);
     }
-
 
 }

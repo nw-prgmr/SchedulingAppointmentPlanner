@@ -44,12 +44,9 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
         LocalDate date = days.get(position);
-        if (date == null) {
-            holder.dayOfMonth.setText("");
-            holder.parentView.setOnClickListener(null); // Disable clicks for empty cells
-            holder.parentView.setBackgroundColor(Color.TRANSPARENT); // Reset background
-        } else {
+
             holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
+
             holder.parentView.setOnClickListener(v -> {
                 onItemListener.onItemClick(position, date); // Pass LocalDate directly
                 System.out.println("Clicked on: " + date); // Debug click event
@@ -61,7 +58,12 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
             } else {
                 holder.parentView.setBackgroundColor(Color.TRANSPARENT);
             }
-        }
+
+            if (date.getMonth().equals(CalendarUtils.selectedDate.getMonth()))
+                holder.dayOfMonth.setTextColor(Color.BLACK);
+            else
+                holder.dayOfMonth.setTextColor(Color.LTGRAY);
+
     }
 
 
