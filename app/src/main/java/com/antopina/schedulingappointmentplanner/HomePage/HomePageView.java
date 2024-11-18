@@ -26,15 +26,13 @@ public class HomePageView extends AppCompatActivity {
         binding = ActivityHomePageViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
         // Check if "open_profile" flag is set in the intent
         if (getIntent().getBooleanExtra("open_profile", false)) {
             binding.bottomNavigationView.setSelectedItemId(R.id.bnvProfile);
             replaceFragment(new ProfileFragment());
-        } else {
-            binding.bottomNavigationView.setSelectedItemId(R.id.bnvCalendar);
-            replaceFragment(new CalendarFragment());
+        }  else {
+            binding.bottomNavigationView.setSelectedItemId(id.bnvTask);
+            replaceFragment(new TaskFragment());
         }
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {

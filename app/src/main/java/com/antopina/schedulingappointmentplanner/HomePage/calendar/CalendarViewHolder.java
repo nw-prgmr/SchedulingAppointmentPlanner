@@ -1,0 +1,37 @@
+package com.antopina.schedulingappointmentplanner.HomePage.calendar;
+
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.antopina.schedulingappointmentplanner.HomePage.adapter.CalendarAdapter;
+import com.antopina.schedulingappointmentplanner.R;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+    private final ArrayList<LocalDate> days;
+    public final View parentView;
+    public final TextView dayOfMonth;
+    private final CalendarAdapter.OnItemListener onItemListener; // Declare as final
+
+    public CalendarViewHolder(@NonNull View itemView, CalendarAdapter.OnItemListener onItemListener, ArrayList<LocalDate> days) {
+        super(itemView);
+        parentView = itemView.findViewById(R.id.parentView);
+        dayOfMonth = itemView.findViewById(R.id.cellDayText);
+        this.onItemListener = onItemListener; // Initialize the listener
+        itemView.setOnClickListener(this); // Set click listener
+        this.days = days;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (onItemListener != null) {
+            onItemListener.onItemClick(getAdapterPosition(), days.get(getAdapterPosition()));
+        }
+    }
+}

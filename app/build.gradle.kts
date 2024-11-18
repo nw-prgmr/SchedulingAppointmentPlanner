@@ -41,10 +41,17 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
+    implementation(libs.swiperefreshlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation ("com.google.firebase:firebase-auth:23.1.0")
     implementation ("androidx.core:core:1.7.0")
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
+
+
+
 
 }

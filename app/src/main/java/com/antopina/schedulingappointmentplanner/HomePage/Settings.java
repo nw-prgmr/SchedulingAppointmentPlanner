@@ -5,28 +5,36 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.antopina.schedulingappointmentplanner.LoginSignup.Login;
+import com.antopina.schedulingappointmentplanner.LoginSignup.ReadWriteUserDetails;
 import com.antopina.schedulingappointmentplanner.R;
 import com.antopina.schedulingappointmentplanner.databinding.ActivitySettingsBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Settings extends AppCompatActivity {
 
     ActivitySettingsBinding binding;
+    FirebaseAuth profileAuth;
 
-    FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        mAuth = FirebaseAuth.getInstance();
 
         // Set up the action bar with a back button
         if (getSupportActionBar() != null) {

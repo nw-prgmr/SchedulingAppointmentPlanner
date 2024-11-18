@@ -12,6 +12,7 @@
     <color name="light_burgundy">#BD3275</color>
     <color name="dark_pink">#E450A8</color>
     <color name="light_pink">#FD65CA</color>
-    <color name="light_pink_50">#FF95B0</color>
+    <color name="transparent">#00FF95B0</color>
+    <color name="progressbar">#FFC5D4</color>
 
 </resources>

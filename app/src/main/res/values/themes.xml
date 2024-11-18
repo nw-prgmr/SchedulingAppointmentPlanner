@@ -1,9 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.SchedulingAppointmentPlanner" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <item name="android:statusBarColor">@color/black</item> <!-- Change to your desired color -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Other customizations -->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/white</item>
+
+        <!-- Set navigation bar icon color in light mode -->
+        <item name="android:windowLightNavigationBar" tools:targetApi="q">true</item>
+
+        <item name="android:windowLightStatusBar" tools:targetApi="o">true</item>
     </style>
 
     <style name="Theme.SchedulingAppointmentPlanner" parent="Base.Theme.SchedulingAppointmentPlanner" />

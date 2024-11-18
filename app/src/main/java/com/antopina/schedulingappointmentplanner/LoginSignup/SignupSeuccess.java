@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.antopina.schedulingappointmentplanner.R;
 import com.antopina.schedulingappointmentplanner.databinding.ActivitySignupSeuccessBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupSeuccess extends AppCompatActivity {
 
@@ -24,8 +25,11 @@ public class SignupSeuccess extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.btLogin.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), Login.class);
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, Login.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         });
 
     }
