@@ -18,9 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.antopina.schedulingappointmentplanner.HomePage.Settings;
-import com.antopina.schedulingappointmentplanner.HomePage.adapter.CalendarAdapter;
-import com.antopina.schedulingappointmentplanner.HomePage.adapter.EventAdapter;
+import com.antopina.schedulingappointmentplanner.adapter.CalendarAdapter;
+import com.antopina.schedulingappointmentplanner.adapter.EventAdapter;
 import com.antopina.schedulingappointmentplanner.HomePage.calendar.CalendarUtils;
 import com.antopina.schedulingappointmentplanner.HomePage.calendar.Event;
 import com.antopina.schedulingappointmentplanner.HomePage.calendar.EventEdit;
@@ -91,7 +90,7 @@ public class WeekView extends Fragment implements CalendarAdapter.OnItemListener
             }
 
             // Initialize adapter with this as the listener
-            CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);
+            CalendarAdapter calendarAdapter = new CalendarAdapter(days, this, getContext());
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
             calendarRecyclerView.setLayoutManager(layoutManager);
             calendarRecyclerView.setAdapter(calendarAdapter);

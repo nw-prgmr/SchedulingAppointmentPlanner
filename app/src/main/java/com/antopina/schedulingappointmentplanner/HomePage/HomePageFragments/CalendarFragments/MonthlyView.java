@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.antopina.schedulingappointmentplanner.HomePage.adapter.CalendarAdapter;
+import com.antopina.schedulingappointmentplanner.adapter.CalendarAdapter;
 import com.antopina.schedulingappointmentplanner.HomePage.calendar.CalendarUtils;
 import com.antopina.schedulingappointmentplanner.R;
 
@@ -68,7 +68,7 @@ public class MonthlyView extends Fragment implements CalendarAdapter.OnItemListe
             ArrayList<LocalDate> daysInMonth = daysInMonthArray();
 
             // Initialize adapter with this as the listener
-            CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+            CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this, getContext());
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
             calendarRecyclerView.setLayoutManager(layoutManager);
             calendarRecyclerView.setAdapter(calendarAdapter);

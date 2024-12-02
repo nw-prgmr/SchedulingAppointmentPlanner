@@ -1,4 +1,4 @@
-package com.antopina.schedulingappointmentplanner.HomePage.adapter;
+package com.antopina.schedulingappointmentplanner.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

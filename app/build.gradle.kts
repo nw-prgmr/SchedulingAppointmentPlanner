@@ -44,6 +44,8 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
     implementation(libs.swiperefreshlayout)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -51,7 +53,6 @@ dependencies {
     implementation ("androidx.core:core:1.7.0")
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
 
-
-
-
+    // Material Design dependency
+    implementation("com.google.android.material:material:1.3.0-alpha03")
 }

@@ -45,10 +45,12 @@ public class CalendarUtils {
 
         int daysInMonth = yearMonth.lengthOfMonth();
         int prevMonthDays = prevYearMonth.lengthOfMonth();
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue(); // Monday = 1, Sunday = 7
+
+        // Adjust dayOfWeek to start with Sunday (Sunday = 0, Monday = 1, ..., Saturday = 6)
+        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue() % 7;
 
         // Add previous month's days
-        for (int i = dayOfWeek - 1; i > 0; i--) {
+        for (int i = dayOfWeek; i > 0; i--) {
             daysInMonthArray.add(firstOfMonth.minusDays(i));
         }
 
@@ -69,7 +71,7 @@ public class CalendarUtils {
 
     public static ArrayList<LocalDate> daysInWeekArray(LocalDate selectedDate) {
         ArrayList<LocalDate> days = new ArrayList<>();
-        LocalDate startOfWeek = selectedDate.minusDays(selectedDate.getDayOfWeek().getValue() - 1); // Start on Monday
+        LocalDate startOfWeek = selectedDate.minusDays(selectedDate.getDayOfWeek().getValue()); // Start on Monday
         for (int i = 0; i < 7; i++) {
             days.add(startOfWeek.plusDays(i));
         }

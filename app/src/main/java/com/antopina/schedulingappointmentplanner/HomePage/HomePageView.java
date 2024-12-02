@@ -2,6 +2,7 @@ package com.antopina.schedulingappointmentplanner.HomePage;
 
 import static com.antopina.schedulingappointmentplanner.R.*;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.CalendarFragment;
 import com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.ProfileFragment;
+import com.antopina.schedulingappointmentplanner.HomePage.calendar.EventEdit;
 import com.antopina.schedulingappointmentplanner.R;
 import com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.StudyFragment;
 import com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.TaskFragment;
@@ -31,8 +33,8 @@ public class HomePageView extends AppCompatActivity {
             binding.bottomNavigationView.setSelectedItemId(R.id.bnvProfile);
             replaceFragment(new ProfileFragment());
         }  else {
-            binding.bottomNavigationView.setSelectedItemId(id.bnvTask);
-            replaceFragment(new TaskFragment());
+            binding.bottomNavigationView.setSelectedItemId(id.bnvCalendar);
+            replaceFragment(new CalendarFragment());
         }
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {

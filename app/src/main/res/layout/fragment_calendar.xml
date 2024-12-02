@@ -4,27 +4,29 @@
     android:id="@+id/frameLayout7"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgwhite"
+    android:background="@color/bgcolor"
     tools:context=".HomePage.HomePageFragments.CalendarFragment">
 
-    <!-- AppBarLayout with SearchBar -->
-    <!--    <com.google.android.material.appbar.AppBarLayout-->
-    <!--        android:id="@+id/app_bar"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent">-->
+<!--     AppBarLayout with SearchBar -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bgcolor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-    <!--        &lt;!&ndash; SearchBar &ndash;&gt;-->
-    <!--        <com.google.android.material.search.SearchBar-->
-    <!--            android:id="@+id/search_bar"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:hint="Search here"-->
-    <!--            app:menu="@menu/search_bar_menu" />-->
+            <!-- SearchBar -->
+            <com.google.android.material.search.SearchBar
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:hint="Search here"
+                app:menu="@menu/search_bar_menu" />
 
-    <!--    </com.google.android.material.appbar.AppBarLayout>-->
+        </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -32,11 +34,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/app_bar">
 
         <Button
             android:id="@+id/btMonthly"
@@ -77,5 +78,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

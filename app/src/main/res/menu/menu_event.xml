@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/save"
+        android:icon="@drawable/check"
+        android:title="save"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/delete"
+        android:icon="@drawable/delete"
+        android:title="delete"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/duplicate"
+        android:icon="@drawable/copy"
+        android:title="duplicate_event"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/share"
+        android:title="share"
+        app:showAsAction="ifRoom" />
+</menu>

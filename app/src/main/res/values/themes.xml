@@ -9,7 +9,17 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="q">true</item>
 
         <item name="android:windowLightStatusBar" tools:targetApi="o">true</item>
+
     </style>
 
     <style name="Theme.SchedulingAppointmentPlanner" parent="Base.Theme.SchedulingAppointmentPlanner" />
+
+    <style name="fab_rounded">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
 </resources>

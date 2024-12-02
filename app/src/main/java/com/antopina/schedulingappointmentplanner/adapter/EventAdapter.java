@@ -1,4 +1,4 @@
-package com.antopina.schedulingappointmentplanner.HomePage.adapter;
+package com.antopina.schedulingappointmentplanner.adapter;
 
 import static com.google.api.ResourceProto.resource;
 
@@ -38,7 +38,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
         String evenTitle = event.getName();
         title.setText(evenTitle);
 
-        String evenDescription = CalendarUtils.formattedTime(event.getTime());
+        String evenDescription = event.getDescription();
         description.setText(evenDescription);
 
         return convertView;

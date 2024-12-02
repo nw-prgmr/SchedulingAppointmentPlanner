@@ -34,13 +34,15 @@ public class Event {
         return events;
     }
 
-
     private String name;
+    private String description;
     private LocalDate date;
     private LocalTime time;
 
-    public Event(String name, LocalDate date, LocalTime time) {
+
+    public Event(String name, String description, LocalDate date, LocalTime time) {
         this.name = name;
+        this.description = description;
         this.date = date;
         this.time = time;
     }
@@ -68,4 +70,13 @@ public class Event {
     public void setTime(LocalTime time) {
         this.time = time;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 }

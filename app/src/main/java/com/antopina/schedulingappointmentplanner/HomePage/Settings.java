@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.antopina.schedulingappointmentplanner.LoginSignup.Login;
 import com.antopina.schedulingappointmentplanner.LoginSignup.ReadWriteUserDetails;
@@ -28,6 +29,7 @@ public class Settings extends AppCompatActivity {
     ActivitySettingsBinding binding;
     FirebaseAuth profileAuth;
 
+    private Toolbar toolbar;
 
 
     @Override
@@ -35,11 +37,13 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        toolbar = findViewById(R.id.appBar);
+        setSupportActionBar(toolbar);
 
-        // Set up the action bar with a back button
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.burgundy))); // Use getSupportActionBar()
+            getSupportActionBar().setTitle("Settings"); // Set the title
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Enable back button
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_back); // Optional: Custom icon
         }
 
         binding.btLogout.setOnClickListener(view -> logout());

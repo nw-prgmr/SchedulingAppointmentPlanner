@@ -33,5 +33,4 @@
         app:menu="@menu/bottom_nav_menu"
         app:itemTextColor="@color/icon_color"/>
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

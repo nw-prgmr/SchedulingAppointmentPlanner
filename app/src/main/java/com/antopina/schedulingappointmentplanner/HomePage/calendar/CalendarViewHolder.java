@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.antopina.schedulingappointmentplanner.HomePage.adapter.CalendarAdapter;
+import com.antopina.schedulingappointmentplanner.adapter.CalendarAdapter;
 import com.antopina.schedulingappointmentplanner.R;
 
 import java.time.LocalDate;

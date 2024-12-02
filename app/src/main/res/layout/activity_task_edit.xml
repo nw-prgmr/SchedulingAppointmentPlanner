@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".HomePage.calendar.EventEdit">
+    tools:context=".HomePage.calendar.TaskEdit">
 
     <include
         layout="@layout/appbar"/>
@@ -24,10 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
-
             <EditText
-                android:id="@+id/eventNameET"
+                android:id="@+id/taskNameET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_margin"
@@ -44,10 +41,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/event_description"
+                android:id="@+id/task_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/eventNameET"
+                android:layout_below="@+id/taskNameET"
                 android:layout_marginStart="@dimen/activity_margin"
                 android:layout_marginTop="@dimen/activity_margin"
                 android:layout_marginEnd="@dimen/activity_margin"
@@ -62,7 +59,7 @@
                 android:id="@+id/event_description_divider"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divider_height"
-                android:layout_below="@+id/event_description"
+                android:layout_below="@+id/task_description"
                 android:layout_marginTop="@dimen/activity_margin"
                 android:layout_marginBottom="@dimen/normal_margin"
                 android:background="@color/inactive"
@@ -107,7 +104,7 @@
 
             <!-- Replace MyTextView with TextView -->
             <TextView
-                android:id="@+id/event_start_date"
+                android:id="@+id/task_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/event_time_image"
@@ -120,7 +117,7 @@
                 tools:text="January 1 1970" />
 
             <TextView
-                android:id="@+id/event_start_time"
+                android:id="@+id/task_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/event_time_image"
@@ -131,43 +128,19 @@
                 android:textSize="@dimen/day_text_size"
                 tools:text="00:00" />
 
-            <TextView
-                android:id="@+id/event_end_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/event_start_date"
-                android:layout_alignStart="@+id/event_all_day_holder"
-                android:background="?attr/selectableItemBackground"
-                android:paddingTop="@dimen/activity_margin"
-                android:paddingEnd="@dimen/activity_margin"
-                android:paddingBottom="@dimen/activity_margin"
-                android:textSize="@dimen/day_text_size"
-                tools:text="January 1 1970" />
-
-            <TextView
-                android:id="@+id/event_end_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/event_start_time"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/medium_margin"
-                android:background="?attr/selectableItemBackground"
-                android:padding="@dimen/activity_margin"
-                android:textSize="@dimen/day_text_size"
-                tools:text="00:00" />
 
             <ImageView
                 android:id="@+id/event_time_zone_divider"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divider_height"
-                android:layout_below="@+id/event_end_date"
+                android:layout_below="@+id/task_date"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:layout_marginBottom="@dimen/medium_margin"
                 android:background="@color/inactive"
                 android:importantForAccessibility="no" />
 
 
-                <!--add reminder-->
+            <!--add reminder-->
             <ImageView
                 android:id="@+id/event_reminder_image"
                 android:layout_width="@dimen/smaller_icon_size"
@@ -285,7 +258,7 @@
                 android:background="@color/inactive"
                 android:importantForAccessibility="no" />
 
-                <!-- Repetation -->
+            <!-- Repetation -->
             <ImageView
                 android:id="@+id/event_repetition_image"
                 android:layout_width="@dimen/smaller_icon_size"
@@ -385,4 +358,5 @@
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

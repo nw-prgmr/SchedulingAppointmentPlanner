@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgwhite"
+    android:background="@color/bgcolor"
     tools:context=".LoginSignup.Login">
 
     <LinearLayout
@@ -60,6 +60,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:hint="E-Mail"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/burgundy" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,6 +86,8 @@
                 android:drawableEnd="@drawable/baseline_remove_red_eye_24"
                 android:hint="Password"
                 android:inputType="textPassword"
+                android:singleLine="true"
+                android:maxLines="1"
                 android:textColor="@color/burgundy" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,7 +123,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="60dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"

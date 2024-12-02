@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/login">
+
+    <activity
+        android:id="@+id/login"
+        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.Login"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+    <activity
+        android:id="@+id/signup"
+        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.Signup"
+        android:label="activity_signup"
+        tools:layout="@layout/activity_signup" />
+    <fragment
+        android:id="@+id/forgotPassword"
+        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.ResetFragments.ForgotPassword"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/getCode"
+        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.ResetFragments.GetCode"
+        android:label="fragment_get_code"
+        tools:layout="@layout/fragment_get_code" />
+    <fragment
+        android:id="@+id/resetPassword"
+        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.ResetFragments.ResetPassword"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password" />
+    <fragment
+        android:id="@+id/resetSuccess"
+        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.ResetFragments.ResetSuccess"
+        android:label="fragment_reset_success"
+        tools:layout="@layout/fragment_reset_success" />
+    <activity
+        android:id="@+id/emailVerification"
+        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.EmailVerification"
+        android:label="activity_email_verification"
+        tools:layout="@layout/activity_email_verification" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.antopina.schedulingappointmentplanner.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/signupSeuccess"
+        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.SignupSeuccess"
+        android:label="activity_signup_seuccess"
+        tools:layout="@layout/activity_signup_seuccess" />
+    <activity
+        android:id="@+id/homePageView"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.HomePageView"
+        android:label="activity_home_page_view"
+        tools:layout="@layout/activity_home_page_view" />
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.TaskFragment"
+        android:label="fragment_task"
+        tools:layout="@layout/fragment_task" />
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/studyFragment"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.StudyFragment"
+        android:label="fragment_study"
+        tools:layout="@layout/fragment_study" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/monthlyView"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.CalendarFragments.MonthlyView"
+        android:label="fragment_monthly_view"
+        tools:layout="@layout/fragment_monthly_view" />
+    <fragment
+        android:id="@+id/weekView"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.CalendarFragments.WeekView"
+        android:label="fragment_week_view"
+        tools:layout="@layout/fragment_week_view" />
+    <fragment
+        android:id="@+id/dailyView"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.CalendarFragments.DailyView"
+        android:label="fragment_daily_view"
+        tools:layout="@layout/fragment_daily_view" />
+    <activity
+        android:id="@+id/eventEdit"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.calendar.EventEdit"
+        android:label="activity_event_edit"
+        tools:layout="@layout/activity_event_edit" />
+    <activity
+        android:id="@+id/taskEdit"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.calendar.TaskEdit"
+        android:label="activity_task_edit"
+        tools:layout="@layout/activity_task_edit" />
+    <activity
+        android:id="@+id/settings2"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.Settings"
+        android:label="activity_settings"
+        tools:layout="@layout/activity_settings" />
+</navigation>
