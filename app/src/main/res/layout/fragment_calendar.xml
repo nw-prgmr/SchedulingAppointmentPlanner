@@ -17,56 +17,27 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <!-- SearchBar -->
-            <com.google.android.material.search.SearchBar
-                android:id="@+id/search_bar"
+<!--            &lt;!&ndash; SearchBar &ndash;&gt;-->
+<!--            <com.google.android.material.search.SearchBar-->
+<!--                android:id="@+id/search_bar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:backgroundTint="@color/white"-->
+<!--                android:hint="Search here"-->
+<!--                app:menu="@menu/search_bar_menu" />-->
+
+            <!-- TabLayout -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:hint="Search here"
-                app:menu="@menu/search_bar_menu" />
+                app:tabIndicatorColor="@color/burgundy"
+                app:tabSelectedTextColor="@color/burgundy"
+                android:backgroundTint="@color/bgcolor"
+                app:tabTextColor="@color/inactive"
+                app:tabTextAppearance="@style/TabTextStyle"/>
 
         </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_bar">
-
-        <Button
-            android:id="@+id/btMonthly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:text="monthly"
-            android:textColor="@color/burgundy"
-            android:layout_weight="1"/>
-
-        <Button
-            android:id="@+id/btWeekly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:text="weekly"
-            android:textColor="@color/burgundy"
-            android:layout_weight="1"/>
-
-        <Button
-            android:id="@+id/btDailyly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:text="daily"
-            android:textColor="@color/burgundy"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
 
     <!-- FrameLayout for Calendar -->
     <FrameLayout
@@ -76,6 +47,8 @@
         android:background="@color/bgwhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintTop_toBottomOf="@id/app_bar"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

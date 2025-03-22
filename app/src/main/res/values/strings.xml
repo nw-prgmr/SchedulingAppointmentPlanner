@@ -29,5 +29,11 @@
     <string name="back"><![CDATA[<-]]></string>
     <string name="next"><![CDATA[->]]></string>
     <string name="add_another_reminder">Add Another Reminder</string>
+    <string name="task">Task</string>
+    <string name="event">Event</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
 
 </resources>

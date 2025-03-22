@@ -5,22 +5,27 @@ import static com.antopina.schedulingappointmentplanner.HomePage.calendar.Calend
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.antopina.schedulingappointmentplanner.HomePage.calendar.Event;
 import com.antopina.schedulingappointmentplanner.adapter.HourAdapter;
 import com.antopina.schedulingappointmentplanner.HomePage.calendar.CalendarUtils;
-import com.antopina.schedulingappointmentplanner.HomePage.calendar.Event;
 import com.antopina.schedulingappointmentplanner.HomePage.calendar.EventEdit;
 import com.antopina.schedulingappointmentplanner.HomePage.calendar.HourEvent;
 import com.antopina.schedulingappointmentplanner.R;
+import com.antopina.schedulingappointmentplanner.databinding.FragmentDailyViewBinding;
+import com.antopina.schedulingappointmentplanner.utils.BottomDialogHelper;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -30,50 +35,59 @@ import java.util.Locale;
 
 public class DailyView extends Fragment {
 
+    private FragmentDailyViewBinding binding;
 
-    private TextView monthDayText;
-    private TextView dayOfWeekTV;
-    private ListView hourListView;
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_daily_view, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Use view binding to inflate the layout
+        binding = FragmentDailyViewBinding.inflate(inflater, container, false);
 
-        try {
-            // Ensure selectedDate is initialized
-            if (selectedDate == null) {
-                selectedDate = LocalDate.now();
-            }
-
-            // Initialize widgets
-            initWidgets(view);
-
-            // Setup the calendar view
-            setDayView();
-
-            // Set click listeners for buttons
-            Button previousMonthButton = view.findViewById(R.id.btnPreviousDaily);
-            Button nextMonthButton = view.findViewById(R.id.btnNextDaily);
-
-            previousMonthButton.setOnClickListener(v -> handleErrors(this::previousDailyAction));
-            nextMonthButton.setOnClickListener(v -> handleErrors(this::nextDailyAction));
-
-            //start event edit
-            Button bteventEdit = view.findViewById(R.id.btNewEvent);
-            bteventEdit.setOnClickListener(v -> eventEdit());
-
-        } catch (Exception e) {
-            showErrorToast("An error occurred while loading the calendar.");
+        // Ensure selectedDate is initialized
+        if (selectedDate == null) {
+            selectedDate = LocalDate.now();
         }
 
-        return view;
+        // Initialize and set up UI elements
+        initWidgets();
+        setDayView();
+        setListeners();
+
+        return binding.getRoot();
     }
 
-    private void initWidgets(View view) {
-        monthDayText = view.findViewById(R.id.monthDayText);
-        dayOfWeekTV = view.findViewById(R.id.tvDayOfWeek);
-        hourListView = view.findViewById(R.id.hourListView);
+    private void initWidgets() {
+        // Widgets are already linked using binding
+    }
+
+    private void setListeners() {
+        // Set click listeners for buttons
+        binding.btnPreviousDaily.setOnClickListener(v -> handleErrors(this::previousDailyAction));
+        binding.btnNextDaily.setOnClickListener(v -> handleErrors(this::nextDailyAction));
+
+        // Set scroll listener on the ListView
+        binding.hourListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                // Optional: Handle scroll state changes
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (view.getLastVisiblePosition() == totalItemCount - 1 && view.getChildAt(view.getChildCount() - 1) != null &&
+                        view.getChildAt(view.getChildCount() - 1).getBottom() <= view.getHeight()) {
+                    // Scrolling down (list reached the bottom)
+                    binding.floatingActionButton.hide();
+                } else if (view.getFirstVisiblePosition() == 0 && view.getChildAt(0) != null &&
+                        view.getChildAt(0).getTop() >= 0) {
+                    // Scrolling up (list reached the top)
+                    binding.floatingActionButton.show();
+                }
+            }
+        });
+
+        // Set click listener for FloatingActionButton
+        binding.floatingActionButton.setOnClickListener(v -> BottomDialogHelper.showBottomDialog(getContext()));
     }
 
     @Override
@@ -83,15 +97,15 @@ public class DailyView extends Fragment {
     }
 
     private void setDayView() {
-        monthDayText.setText(CalendarUtils.monthDayFromDate(selectedDate));
+        binding.monthDayText.setText(CalendarUtils.monthDayFromDate(selectedDate));
         String dayOfWeek = selectedDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
-        dayOfWeekTV.setText(dayOfWeek);
+        binding.tvDayOfWeek.setText(dayOfWeek);
         setHourAdapter();
     }
 
-    private void  setHourAdapter() {
+    private void setHourAdapter() {
         HourAdapter hourAdapter = new HourAdapter(getContext(), hourEventList());
-        hourListView.setAdapter(hourAdapter);
+        binding.hourListView.setAdapter(hourAdapter);
     }
 
     private ArrayList<HourEvent> hourEventList() {
@@ -132,5 +146,11 @@ public class DailyView extends Fragment {
 
     private void showErrorToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null; // Avoid memory leaks
     }
 }

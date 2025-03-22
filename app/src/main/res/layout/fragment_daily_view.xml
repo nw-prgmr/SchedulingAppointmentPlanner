@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout10"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgcolor"
     tools:context=".HomePage.HomePageFragments.CalendarFragments.DailyView">
 
     <LinearLayout
@@ -29,7 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:text="@string/back"
+                android:text=""
+                android:drawableLeft="@drawable/ic_back"
                 android:textColor="@color/burgundy"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -40,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="September 2001"
+                android:textColor="@color/black"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -49,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:text="@string/next"
+                android:text=""
+                android:drawableEnd="@drawable/ic_next"
                 android:textColor="@color/burgundy"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -60,29 +64,29 @@
             android:id="@+id/tvDayOfWeek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:padding="5dp"
             android:text="Monday"
             android:textAlignment="center"
-            android:textColor="@color/inactive"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/btNewEvent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:text="NEW EVENT"
-            android:textColor="@color/burgundy"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
+            android:textColor="@color/secondary_burgundy"
+            android:textSize="24sp" />
 
         <ListView
             android:id="@+id/hourListView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"/>
+            android:layout_weight="5" />
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/light_pink"
+        android:src="@drawable/add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

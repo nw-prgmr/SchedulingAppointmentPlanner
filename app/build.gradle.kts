@@ -5,7 +5,9 @@ plugins {
 
 android {
 
-    viewBinding.enable = true
+    viewBinding {
+        enable = true
+    }
     namespace = "com.antopina.schedulingappointmentplanner"
     compileSdk = 34
 
@@ -13,21 +15,32 @@ android {
         applicationId = "com.antopina.schedulingappointmentplanner"
         minSdk = 29
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 5
+        versionName = "1.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = "studentkey"
+            keyPassword = "CardinalPlayground"
+            storeFile = file("C:/Users/admin/Documents/JUNIE/CODE/student_keystore.jks")
+            storePassword = "CardinalPlayground"
+        }
+    }
+
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -35,7 +48,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -49,9 +61,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation ("com.google.firebase:firebase-auth:23.1.0")
-    implementation ("androidx.core:core:1.7.0")
-    implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
+    implementation("com.google.firebase:firebase-auth:23.1.0")
+    implementation("androidx.core:core:1.7.0")
+    implementation("com.mikhaellopez:circularprogressbar:3.1.0")
 
     // Material Design dependency
     implementation("com.google.android.material:material:1.3.0-alpha03")

@@ -5,158 +5,157 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     tools:context=".HomePage.Settings">
 
-    <!-- Settings Title -->
-    <include
-        layout="@layout/appbar"/>
+    <!-- Custom AppBar (back button + title) -->
+    <LinearLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/bgcolor"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- Scrollable View for Settings Options -->
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="0dp"
+        <!-- Back Button -->
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="Back"
+            android:src="@drawable/arrow_back"
+            app:tint="@color/burgundy" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Manage Profile"
+            android:textColor="@color/burgundy"
+            android:textSize="20sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Delete Icon -->
+        <ImageView
+            android:id="@+id/manageProfileIV"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="Delete All"
+            android:src="@drawable/baseline_manage_accounts_24"
+            app:tint="@color/burgundy" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="24dp"
+        android:background="@color/bgwhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBar">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/emailTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:text="Email here"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/burgundy50"/>
 
-            <!-- Appearance Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="APPEARANCE"
-                android:textColor="@android:color/darker_gray" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/text_input_outline_color"
+            app:cursorColor="@color/dark_pink"
+            android:textColorHint="@color/burgundy"
+            app:hintTextColor="@color/burgundy"
+            app:boxStrokeWidth="2dp"
+            app:boxCornerRadiusBottomEnd="5dp"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp">
 
-            <!-- Dark Mode Option -->
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/firstNameUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingVertical="12dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                     />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="16dp"
-                    android:text="Dark Mode"
-                    android:textColor="@android:color/black" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-
-                    android:visibility="visible" />
-            </LinearLayout>
+                android:hint="@string/first_name"
+                android:textColor="@color/burgundy"
+                android:singleLine="true"
+                android:layout_marginBottom="8dp"
+                android:inputType="textPersonName"
+                android:editable="false"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-            <!-- Light Mode Option -->
-            <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/text_input_outline_color"
+            app:cursorColor="@color/dark_pink"
+            android:textColorHint="@color/burgundy"
+            app:hintTextColor="@color/burgundy"
+            app:boxStrokeWidth="2dp"
+            app:boxCornerRadiusBottomEnd="5dp"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lastNameUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingVertical="12dp">
+                android:layout_marginBottom="8dp"
+                android:editable="false"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textColor="@color/burgundy" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                     />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/primary_button"
+            android:backgroundTint="@color/burgundy"
+            android:text="UPDATE PROFILE"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:id="@+id/updateProfileBT"
+            android:visibility="gone"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="16dp"
-                    android:text="Light Mode"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/primary_button"
+            android:backgroundTint="@color/white"
+            android:text="DELETE ACCOUNT"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:id="@+id/deleteAccountBT"
+            android:visibility="gone"/>
 
-            <!-- Calendar Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="CALENDAR"
-                android:textColor="@android:color/darker_gray" />
 
-            <!-- Sync to my calendar -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingVertical="12dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/calendar_inactive" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="16dp"
-                    android:text="Sync to my calendar"
-                    android:textColor="@android:color/black" />
-
-                <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="ACCOUNT"
-                android:textColor="@android:color/darker_gray" />
-
-            <LinearLayout
-                android:id="@+id/btLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingVertical="12dp">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/logout"
-                    />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingStart="16dp"
-                    android:text="Logout"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

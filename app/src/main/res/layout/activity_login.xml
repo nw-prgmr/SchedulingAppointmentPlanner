@@ -46,14 +46,15 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/inactive"
+            app:boxStrokeColor="@color/text_input_outline_color"
+            app:cursorColor="@color/dark_pink"
+            android:textColorHint="@color/burgundy"
+            app:hintTextColor="@color/burgundy"
+            app:boxStrokeWidth="2dp"
             app:boxCornerRadiusBottomEnd="5dp"
             app:boxCornerRadiusBottomStart="5dp"
             app:boxCornerRadiusTopEnd="5dp"
-            app:boxCornerRadiusTopStart="5dp"
-            app:boxStrokeColor="@color/burgundy"
-            app:boxStrokeWidth="1dp"
-            app:hintTextColor="@color/black">
+            app:boxCornerRadiusTopStart="5dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
@@ -69,20 +70,21 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/inactive"
+            app:boxStrokeColor="@color/text_input_outline_color"
+            app:cursorColor="@color/dark_pink"
+            android:textColorHint="@color/burgundy"
+            app:hintTextColor="@color/burgundy"
+            app:boxStrokeWidth="2dp"
             app:boxCornerRadiusBottomEnd="5dp"
             app:boxCornerRadiusBottomStart="5dp"
             app:boxCornerRadiusTopEnd="5dp"
             app:boxCornerRadiusTopStart="5dp"
-            app:boxStrokeColor="@color/burgundy"
-            app:boxStrokeWidth="1dp"
-            app:hintTextColor="@color/black">
+            android:layout_marginBottom="30dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
                 android:drawableEnd="@drawable/baseline_remove_red_eye_24"
                 android:hint="Password"
                 android:inputType="textPassword"
@@ -107,9 +109,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
+            android:textStyle="bold"
             android:text="Forgot Password?"
             android:textColor="@color/burgundy"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <ProgressBar
             android:id="@+id/progressBar2"
@@ -122,7 +125,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
         android:gravity="center"
         android:orientation="horizontal"
@@ -135,7 +138,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Don’t have an account? "
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvSignup"
@@ -143,7 +147,7 @@
             android:layout_height="wrap_content"
             android:text="Sign Up"
             android:textColor="@color/burgundy"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
     </LinearLayout>

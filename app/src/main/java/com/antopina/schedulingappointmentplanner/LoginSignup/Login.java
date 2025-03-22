@@ -1,12 +1,15 @@
 package com.antopina.schedulingappointmentplanner.LoginSignup;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -14,22 +17,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.antopina.schedulingappointmentplanner.HomePage.HomePageView;
+import com.antopina.schedulingappointmentplanner.utils.LoadingDialogBar;
+import com.antopina.schedulingappointmentplanner.R;
 import com.antopina.schedulingappointmentplanner.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.core.Tag;
 
 public class Login extends AppCompatActivity {
 
     ActivityLoginBinding binding;
     FirebaseAuth mAuth;
+    LoadingDialogBar loadingDialogBar;
 
     private static final String TAG = "LoginActivity";
 
@@ -41,6 +45,7 @@ public class Login extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
+        loadingDialogBar = new LoadingDialogBar(this);
 
         binding.etPassword.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -78,20 +83,20 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                if (password.length() < 8 ) {
-                    binding.etPassword.setError("It must be 8 characters long");
+                if (password.length() < 6 ) {
+                    binding.etPassword.setError("It must be 6 characters long");
                     binding.etPassword.requestFocus();
                     return;
                 }
 
-                // Show the progress bar
-                binding.progressBar2.setVisibility(View.VISIBLE);
+                /// Show the loading dialog
+                loadingDialogBar.ShowDialog("Logging in...");
 
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         // Hide the progress bar when the task completes
-                        binding.progressBar2.setVisibility(View.GONE);
+                        loadingDialogBar.HideDialog();
 
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
@@ -128,16 +133,13 @@ public class Login extends AppCompatActivity {
                 });
 
             } catch (Exception e) {
-                binding.progressBar2.setVisibility(View.GONE);
+                loadingDialogBar.HideDialog();
                 Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
-
-
         binding.tvForgot.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), ResetPasswordView.class);
-            startActivity(intent);
+            showDialog();
         });
 
         binding.tvSignup.setOnClickListener(view -> {
@@ -155,5 +157,39 @@ public class Login extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), HomePageView.class));
             finish();
         }
+    }
+
+    private void showDialog() {
+        // Create a dialog to inform the user
+        Dialog dialog = new Dialog(Login.this);
+        dialog.setContentView(R.layout.dialog_reset_password); // Reference the layout XML file
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        // Set click listener for the button
+        Button resetButton = dialog.findViewById(R.id.btReset);
+        resetButton.setOnClickListener(view -> {
+            String email = ((TextInputEditText) dialog.findViewById(R.id.etEmail)).getText().toString().trim();
+            if (!TextUtils.isEmpty(email)) {
+                sendPasswordResetEmail(email);
+//                dialog.dismiss(); // Close dialog after sending the email
+            } else {
+                // Handle empty email field
+                Toast.makeText(Login.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void sendPasswordResetEmail(String email) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(Login.this, "Reset email sent, please check your inbox.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Login.this, "Failed to send reset email. Try again.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

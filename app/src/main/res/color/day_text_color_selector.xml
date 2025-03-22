@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Selected state -->
+    <item android:color="@color/white" android:state_selected="true" />
+    <!-- Pressed state (e.g., today's date) -->
+    <item android:color="@color/burgundy" android:state_pressed="true" />
+    <!-- Default state -->
+    <item android:color="@color/burgundy" />
+</selector>

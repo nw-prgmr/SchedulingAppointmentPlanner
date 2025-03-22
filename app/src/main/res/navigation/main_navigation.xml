@@ -15,41 +15,6 @@
         android:name="com.antopina.schedulingappointmentplanner.LoginSignup.Signup"
         android:label="activity_signup"
         tools:layout="@layout/activity_signup" />
-    <fragment
-        android:id="@+id/forgotPassword"
-        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.ResetFragments.ForgotPassword"
-        android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password" />
-    <fragment
-        android:id="@+id/getCode"
-        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.ResetFragments.GetCode"
-        android:label="fragment_get_code"
-        tools:layout="@layout/fragment_get_code" />
-    <fragment
-        android:id="@+id/resetPassword"
-        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.ResetFragments.ResetPassword"
-        android:label="fragment_reset_password"
-        tools:layout="@layout/fragment_reset_password" />
-    <fragment
-        android:id="@+id/resetSuccess"
-        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.ResetFragments.ResetSuccess"
-        android:label="fragment_reset_success"
-        tools:layout="@layout/fragment_reset_success" />
-    <activity
-        android:id="@+id/emailVerification"
-        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.EmailVerification"
-        android:label="activity_email_verification"
-        tools:layout="@layout/activity_email_verification" />
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.antopina.schedulingappointmentplanner.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
-    <activity
-        android:id="@+id/signupSeuccess"
-        android:name="com.antopina.schedulingappointmentplanner.LoginSignup.SignupSeuccess"
-        android:label="activity_signup_seuccess"
-        tools:layout="@layout/activity_signup_seuccess" />
     <activity
         android:id="@+id/homePageView"
         android:name="com.antopina.schedulingappointmentplanner.HomePage.HomePageView"
@@ -57,7 +22,7 @@
         tools:layout="@layout/activity_home_page_view" />
     <fragment
         android:id="@+id/taskFragment"
-        android:name="com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.TaskFragment"
+        android:name="com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.ActivityFragments.TaskFragment"
         android:label="fragment_task"
         tools:layout="@layout/fragment_task" />
     <fragment
@@ -105,4 +70,9 @@
         android:name="com.antopina.schedulingappointmentplanner.HomePage.Settings"
         android:label="activity_settings"
         tools:layout="@layout/activity_settings" />
+    <activity
+        android:id="@+id/splashActivity"
+        android:name="com.antopina.schedulingappointmentplanner.SplashActivity"
+        android:label="activity_splash"
+        tools:layout="@layout/activity_splash" />
 </navigation>

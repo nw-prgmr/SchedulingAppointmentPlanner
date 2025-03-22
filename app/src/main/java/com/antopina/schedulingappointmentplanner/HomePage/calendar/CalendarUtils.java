@@ -11,12 +11,12 @@ public class CalendarUtils {
     public static LocalDate selectedDate;
 
     public static String formattedDate(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return date.format(formatter);
     }
 
     public static String formattedTime(LocalTime time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
         return time.format(formatter);
     }
 

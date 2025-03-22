@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp"
+    android:layout_height="70dp"
+    app:cardElevation="4dp"
+    android:layout_marginBottom="12dp"
+    android:id="@+id/week_item_list">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/activityTypeTV"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_blue_light">
+
+            <ImageView
+                android:id="@+id/donIV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/check" />
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Full house"
+                    android:singleLine="true"
+                    android:textSize="20sp"
+                    android:layout_weight="1"
+                    android:id="@+id/title"
+                    android:textColor="@android:color/black"
+                    android:textAllCaps="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="00:00 a"
+                    android:singleLine="true"
+                    android:textSize="16sp"
+                    android:id="@+id/time"
+                    android:textColor="@android:color/black" />
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Full House is the Grand prize in any Tambola game played. It means all 15 Numbers of a ticket are cut, striked out"
+                android:singleLine="true"
+                android:alpha="0.5"
+                android:id="@+id/description"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

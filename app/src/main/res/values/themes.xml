@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SchedulingAppointmentPlanner" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Other customizations -->
-        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:statusBarColor">@color/bgcolor</item>
         <item name="android:navigationBarColor">@color/white</item>
 
         <!-- Set navigation bar icon color in light mode -->
@@ -21,5 +21,22 @@
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
+
+    <style name="CustomAlertDialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="colorAccent">@color/burgundy</item>
+        <item name="android:background">@drawable/dialog_profile</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
+    <style name="TabTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item> <!-- Adjust text size -->
+        <item name="android:textStyle">normal</item> <!-- Optional: make the text bold -->
     </style>
 </resources>

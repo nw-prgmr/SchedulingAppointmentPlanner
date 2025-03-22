@@ -3,103 +3,194 @@ package com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.Cal
 import static com.antopina.schedulingappointmentplanner.HomePage.calendar.CalendarUtils.daysInWeekArray;
 import static com.antopina.schedulingappointmentplanner.HomePage.calendar.CalendarUtils.monthYearFromDate;
 
-import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.antopina.schedulingappointmentplanner.adapter.CalendarAdapter;
-import com.antopina.schedulingappointmentplanner.adapter.EventAdapter;
 import com.antopina.schedulingappointmentplanner.HomePage.calendar.CalendarUtils;
 import com.antopina.schedulingappointmentplanner.HomePage.calendar.Event;
-import com.antopina.schedulingappointmentplanner.HomePage.calendar.EventEdit;
 import com.antopina.schedulingappointmentplanner.R;
+import com.antopina.schedulingappointmentplanner.adapter.CalendarAdapter;
+import com.antopina.schedulingappointmentplanner.adapter.EventAdapter;
+import com.antopina.schedulingappointmentplanner.databinding.FragmentWeekViewBinding;
+import com.antopina.schedulingappointmentplanner.utils.BottomDialogHelper;
+import com.antopina.schedulingappointmentplanner.utils.EventDataBsaeHelper;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
+import java.util.Comparator;
 
 public class WeekView extends Fragment implements CalendarAdapter.OnItemListener {
 
-    private TextView monthYearText;
-    private RecyclerView calendarRecyclerView;
-    private ListView eventListView;
+    private FragmentWeekViewBinding binding;
+    private EventDataBsaeHelper dbHelper;
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_week_view, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentWeekViewBinding.inflate(inflater, container, false);
+        dbHelper = new EventDataBsaeHelper(getContext());
 
         try {
-            // Ensure selectedDate is initialized
             if (CalendarUtils.selectedDate == null) {
                 CalendarUtils.selectedDate = LocalDate.now();
             }
 
-            // Initialize widgets
-            initWidgets(view);
-
-            // Setup the calendar view
             setWeekView();
-
-            // Set click listeners for buttons
-            Button previousMonthButton = view.findViewById(R.id.btnPreviousWeek);
-            Button nextMonthButton = view.findViewById(R.id.btnNextWeek);
-
-            previousMonthButton.setOnClickListener(v -> handleErrors(this::previousWeekAction));
-            nextMonthButton.setOnClickListener(v -> handleErrors(this::nextWeekAction));
-
-            //start event edit
-            Button bteventEdit = view.findViewById(R.id.btNewEvent);
-            bteventEdit.setOnClickListener(v -> eventEdit());
+            setListeners();
 
         } catch (Exception e) {
+            Log.e("WeekViewError", "Error initializing view: " + e.getMessage());
             showErrorToast("An error occurred while loading the calendar.");
         }
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initWidgets(View view) {
-        calendarRecyclerView = view.findViewById(R.id.rvcalendar);
-        monthYearText = view.findViewById(R.id.tvmonthYear);
-        eventListView = view.findViewById(R.id.eventListView);
+    private void setListeners() {
+        binding.btnPreviousWeek.setOnClickListener(v -> handleErrors(this::previousWeekAction));
+        binding.btnNextWeek.setOnClickListener(v -> handleErrors(this::nextWeekAction));
+        binding.floatingActionButton.setOnClickListener(v -> BottomDialogHelper.showBottomDialog(getContext()));
+
+        binding.weektListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {}
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (view.getLastVisiblePosition() == totalItemCount - 1 && view.getChildAt(view.getChildCount() - 1) != null &&
+                        view.getChildAt(view.getChildCount() - 1).getBottom() <= view.getHeight()) {
+                    binding.floatingActionButton.hide();
+                } else if (view.getFirstVisiblePosition() == 0 && view.getChildAt(0) != null &&
+                        view.getChildAt(0).getTop() >= 0) {
+                    binding.floatingActionButton.show();
+                }
+            }
+        });
     }
 
     private void setWeekView() {
         try {
-            if (CalendarUtils.selectedDate == null) {
-                throw new IllegalStateException("Selected date is null");
-            }
+            binding.tvmonthYear.setText(monthYearFromDate(CalendarUtils.selectedDate));
 
-            monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
             ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
-
             if (days == null || days.isEmpty()) {
                 throw new IllegalStateException("Days list is empty");
             }
 
-            // Initialize adapter with this as the listener
             CalendarAdapter calendarAdapter = new CalendarAdapter(days, this, getContext());
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
-            calendarRecyclerView.setLayoutManager(layoutManager);
-            calendarRecyclerView.setAdapter(calendarAdapter);
-            setEventAdapter();
+            binding.rvcalendar.setLayoutManager(layoutManager);
+            binding.rvcalendar.setAdapter(calendarAdapter);
 
-            System.out.println("Adapter set with " + days.size() + " items");
+            setEventAndTaskAdapter(); // Display events/tasks for the selected date
         } catch (Exception e) {
-            showErrorToast("Failed to update the calendar view. " + e.getMessage());
+            Log.e("WeekViewError", "Error setting week view: " + e.getMessage());
+            showErrorToast("Failed to update the calendar view.");
         }
+    }
+
+    private void setEventAndTaskAdapter() {
+        try {
+            // Fetch events and tasks for the selected date
+            ArrayList<Event> events = getEventsForDate(CalendarUtils.selectedDate);
+            ArrayList<Event> tasks = getTasksForDate(CalendarUtils.selectedDate);
+
+            // Combine events and tasks
+            ArrayList<Event> combinedEventsAndTasks = new ArrayList<>();
+            combinedEventsAndTasks.addAll(events);
+            combinedEventsAndTasks.addAll(tasks);
+
+            // Sort the combined list by dueTime
+            combinedEventsAndTasks.sort(new Comparator<Event>() {
+                @Override
+                public int compare(Event task1, Event task2) {
+                    return task1.getTime().compareTo(task2.getTime()); // Compare by dueTime
+                }
+            });
+
+            // Use EventAdapter for displaying the events and tasks
+            EventAdapter eventAdapter = new EventAdapter(getContext(), combinedEventsAndTasks);
+            binding.weektListView.setAdapter(eventAdapter); // Set the adapter for ListView
+        } catch (Exception e) {
+            Log.e("WeekViewError", "Error setting event and task adapter: " + e.getMessage());
+            showErrorToast("Failed to load events and tasks.");
+        }
+    }
+
+    private ArrayList<Event> getEventsForDate(LocalDate date) {
+        return dbHelper.getEventsForDate(date.toString());
+    }
+
+    private ArrayList<Event> getTasksForDate(LocalDate date) {
+        return getTasksForDueDate(date.toString());
+    }
+
+    private ArrayList<Event> getTasksForDueDate(String dueDate) {
+        ArrayList<Event> taskList = new ArrayList<>();
+        Cursor taskCursor = dbHelper.getTasksForDueDate(dueDate);
+
+        if (taskCursor != null) {
+            try {
+                int nameIndex = taskCursor.getColumnIndex(EventDataBsaeHelper.TASK_COLUMN_NAME);
+                int descIndex = taskCursor.getColumnIndex(EventDataBsaeHelper.TASK_COLUMN_DESCRIPTION);
+                int dueDateIndex = taskCursor.getColumnIndex(EventDataBsaeHelper.TASK_COLUMN_DUE_DATE);
+                int dueTimeIndex = taskCursor.getColumnIndex(EventDataBsaeHelper.TASK_COLUMN_DUE_TIME);
+                int statusIndex = taskCursor.getColumnIndex(EventDataBsaeHelper.TASK_COLUMN_STATUS); // Add the status column
+
+                if (nameIndex == -1 || descIndex == -1 || dueDateIndex == -1 || dueTimeIndex == -1 || statusIndex == -1) {
+                    Log.e("DatabaseError", "One or more columns are missing in the database schema.");
+                    return taskList;
+                }
+
+                // Define formatter for 'hh:mm:ss a' format
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+
+                while (taskCursor.moveToNext()) {
+                    String taskName = taskCursor.getString(nameIndex);
+                    String taskDescription = taskCursor.getString(descIndex);
+                    String taskDueDate = taskCursor.getString(dueDateIndex);
+                    String taskDueTime = taskCursor.getString(dueTimeIndex);
+                    String taskStatusStr = taskCursor.getString(statusIndex); // Get task status as a string from the database
+
+                    // Convert the taskStatus string to an integer (use a default value if not a valid number)
+                    int taskStatus = 0; // Default value if parsing fails
+                    try {
+                        taskStatus = Integer.parseInt(taskStatusStr); // Convert taskStatus to integer
+                    } catch (NumberFormatException e) {
+                        Log.e("DatabaseError", "Invalid task status value: " + taskStatusStr);
+                    }
+
+                    try {
+                        LocalDate dueDateTask = LocalDate.parse(taskDueDate); // Assuming ISO format
+                        LocalTime dueTimeTask = LocalTime.parse(taskDueTime, timeFormatter); // Use custom formatter
+
+                        taskList.add(new Event(taskName, taskDescription, dueDateTask, dueTimeTask, true, taskStatus, dueDateTask, dueTimeTask));
+                    } catch (Exception e) {
+                        Log.e("TaskParsingError", "Error parsing task data: " + e.getMessage());
+                    }
+                }
+            } finally {
+                taskCursor.close();
+            }
+        } else {
+            Log.d("Database", "Task cursor is null for due date: " + dueDate);
+        }
+
+        return taskList;
     }
 
     private void previousWeekAction() {
@@ -112,38 +203,29 @@ public class WeekView extends Fragment implements CalendarAdapter.OnItemListener
         setWeekView();
     }
 
-    private void eventEdit() {
-        Intent intent = new Intent(getContext(), EventEdit.class);
-        startActivity(intent);
-    }
-
     @Override
     public void onItemClick(int position, LocalDate date) {
-        CalendarUtils.selectedDate = date;
-        setWeekView();
+        CalendarUtils.selectedDate = date; // Update the selected date
+        setEventAndTaskAdapter(); // Refresh the events/tasks for the selected date
     }
 
     private void handleErrors(Runnable action) {
         try {
             action.run();
         } catch (Exception e) {
+            Log.e("ErrorHandler", "Error executing action: " + e.getMessage());
             showErrorToast("An unexpected error occurred.");
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        setEventAdapter();
-    }
-
-    private void setEventAdapter() {
-        ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
-        EventAdapter eventAdapter = new EventAdapter(getContext(), dailyEvents);
-        eventListView.setAdapter(eventAdapter);
     }
 
     private void showErrorToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }
+

@@ -8,11 +8,13 @@
     <item android:title="item4"/>
 
     <item
+        android:id="@+id/calendar"
         android:icon="@drawable/baseline_calendar_month_24"
         android:title="Calendar"
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/apps"
         android:icon="@drawable/apps"
         android:title="Calendar"
         app:showAsAction="always" />

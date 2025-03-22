@@ -1,34 +1,30 @@
 package com.antopina.schedulingappointmentplanner.LoginSignup;
 
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.antopina.schedulingappointmentplanner.HomePage.HomePageView;
-import com.antopina.schedulingappointmentplanner.MainActivity;
+import com.antopina.schedulingappointmentplanner.utils.LoadingDialogBar;
+import com.antopina.schedulingappointmentplanner.R;
 import com.antopina.schedulingappointmentplanner.databinding.ActivitySignupBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -40,6 +36,9 @@ public class Signup extends AppCompatActivity {
     ActivitySignupBinding binding;
     FirebaseAuth mAuth;
     FirebaseFirestore fstore;
+    LoadingDialogBar loadingDialogBar;
+
+    String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}$";
 
     private static final String TAG = "SignupActivity";
     private String userID;
@@ -53,6 +52,7 @@ public class Signup extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
+        loadingDialogBar = new LoadingDialogBar(this);
 
         binding.etPassword.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -94,7 +94,8 @@ public class Signup extends AppCompatActivity {
         binding.btSignup.setOnClickListener(view -> {
             try {
                 String email = binding.etEmail.getText().toString().trim();
-                String fullName = binding.etFullName.getText().toString();
+                String firstName = binding.etFirstName.getText().toString();
+                String lastName = binding.etLastName.getText().toString();
                 String password = binding.etPassword.getText().toString().trim();
                 String confirmPassword = binding.etConfirmPassword.getText().toString().trim();
 
@@ -103,39 +104,42 @@ public class Signup extends AppCompatActivity {
                     binding.etEmail.setError("Required Field");
                     binding.etEmail.requestFocus();
                     return;
-                }
-
-                if (TextUtils.isEmpty(fullName)) {
-                    binding.etFullName.setError("Required Field");
-                    binding.etFullName.requestFocus();
+                }else if (TextUtils.isEmpty(firstName)) {
+                    binding.etFirstName.setError("Required Field");
+                    binding.etFirstName.requestFocus();
                     return;
-                }
-
-                if (TextUtils.isEmpty(password)) {
+                } else if (TextUtils.isEmpty(lastName)) {
+                    binding.etLastName.setError("Required Field");
+                    binding.etLastName.requestFocus();
+                    return;
+                }else if (TextUtils.isEmpty(password)) {
                     binding.etPassword.setError("Required Field");
                     binding.etPassword.requestFocus();
                     return;
-                }
-
-                if (TextUtils.isEmpty(confirmPassword)) {
+                }else if (TextUtils.isEmpty(confirmPassword)) {
                     binding.etConfirmPassword.setError("Required Field");
                     binding.etConfirmPassword.requestFocus();
                     return;
                 }
 
-                // Validate password length
-                if (password.length() < 8 || confirmPassword.length() < 8) {
-                    binding.etPassword.setError("It must be 8 characters long");
-                    binding.etConfirmPassword.setError("It must be 8 characters long");
+                if (lastName.length() < 4 ) {
+                    binding.etLastName.setError("It must be 4 characters long");
+                    binding.etLastName.requestFocus();
+                    return;
+                }
+
+                // Validate password
+                if (!password.matches(passwordPattern)) {
+                    binding.etPassword.setError("Password must be at least 6 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.");
+                    binding.etPassword.requestFocus();
                     return;
                 }
 
                 // Confirm that passwords match
                 if (password.equals(confirmPassword)) {
-                    binding.progressBar.setVisibility(View.VISIBLE);
+                    loadingDialogBar.ShowDialog("Creating account...");
 
                     // Create the user
-                    // After the user is created
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -154,7 +158,8 @@ public class Signup extends AppCompatActivity {
                                                         userID = mAuth.getCurrentUser().getUid();
                                                         DocumentReference documentReference = fstore.collection("users").document(userID);
                                                         Map<String, Object> users = new HashMap<>();
-                                                        users.put("fName", fullName);
+                                                        users.put("firstName", firstName);
+                                                        users.put("lastName", lastName);
                                                         users.put("email", email);
                                                         documentReference.set(users).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                             @Override
@@ -163,20 +168,19 @@ public class Signup extends AppCompatActivity {
                                                             }
                                                         });
 
-                                                        // Redirect to EmailVerificationActivity
-                                                        Intent intent = new Intent(Signup.this, MainActivity.class);
-                                                        intent.putExtra("email", email); // Optional: Pass email if needed
-                                                        startActivity(intent);
-                                                        finish();
+                                                        // Redirect to MainActivity
+                                                        showDialog();
                                                     } else {
-                                                        Toast.makeText(Signup.this, "Registration failed. Please try again.", Toast.LENGTH_LONG).show();
+                                                        Toast.makeText(Signup.this, "Failed to send verification email. Please try again.", Toast.LENGTH_LONG).show();
                                                     }
                                                 }
                                             });
                                         }
-                                        binding.progressBar.setVisibility(View.GONE);
+                                        loadingDialogBar.HideDialog();
                                     } else {
-                                        // Handle exceptions (same as before)
+                                        // Handle exceptions
+                                        Toast.makeText(Signup.this, "Registration failed. Please try again.", Toast.LENGTH_LONG).show();
+                                        loadingDialogBar.HideDialog();
                                     }
                                 }
                             });
@@ -196,5 +200,22 @@ public class Signup extends AppCompatActivity {
             startActivity(intent);
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        // Redirect to the login screen instead of exiting or signing in
+        Intent intent = new Intent(Signup.this, Login.class);
+        startActivity(intent);
+        finish(); // Ensure Signup activity is closed
+    }
+
+    private void showDialog() {
+        // Create a dialog to inform the user
+        Dialog dialog = new Dialog(Signup.this);
+        dialog.setContentView(R.layout.dialog_email_signup); // Reference the layout XML file
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 }

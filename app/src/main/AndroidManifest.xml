@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +17,24 @@
         android:theme="@style/Theme.SchedulingAppointmentPlanner"
         tools:targetApi="31">
         <activity
+            android:name=".HomePage.HomePageFragments.AddBook"
+            android:exported="false" />
+        <activity
+            android:name=".HomePage.HomePageFragments.CompletedTask"
+            android:exported="false" />
+        <activity
+            android:name=".HomePage.calendar.TaskUpdateEdit"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".HomePage.calendar.TaskEdit"
             android:exported="false" />
         <activity
@@ -25,38 +44,22 @@
             android:name=".alarm"
             android:exported="false" />
         <activity
-            android:name=".LoginSignup.ResetPasswordView"
-            android:exported="false"
-            android:label="Settings"
-            android:parentActivityName=".LoginSignup.Login"
-            android:theme="@style/AppTheme.SettingsActivity" />
-        <activity
             android:name=".HomePage.Settings"
             android:exported="false"
             android:label="Settings" />
-        <activity
-            android:name=".LoginSignup.EmailVerification"
-            android:exported="false" />
-        <activity
-            android:name=".LoginSignup.SignupSeuccess"
-            android:exported="false" />
         <activity
             android:name=".LoginSignup.Signup"
             android:exported="false" />
         <activity
             android:name=".LoginSignup.Login"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".HomePage.HomePageView"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+
+        <receiver
+            android:name=".BroadcastReceiver.AlarmReceiver"
+            android:enabled="true"
             android:exported="false" />
     </application>
 

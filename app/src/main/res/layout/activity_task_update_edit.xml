@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgcolor"
+    tools:context=".HomePage.calendar.TaskIpdateEdit">
+
+    <include
+        layout="@layout/appbar"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/event_nested_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:id="@+id/event_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/titleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="@dimen/activity_margin"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/updateTaskNameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleTV"
+                android:layout_marginStart="@dimen/activity_margin"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/activity_margin"
+                android:background="@drawable/otp_box"
+                android:ems="10"
+                android:hint="@string/title"
+                android:textColor="@color/dark_pink"
+                android:textCursorDrawable="@color/light_pink"
+                android:inputType="textCapSentences"
+                android:maxLength="180"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:textColorHint="@color/inactive"
+                android:textSize="@dimen/day_text_size" />
+
+            <TextView
+                android:id="@+id/descriptionTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:text="@string/description"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_below="@+id/updateTaskNameET"/>
+
+            <EditText
+                android:id="@+id/update_Task_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/descriptionTV"
+                android:layout_marginStart="@dimen/activity_margin"
+                android:layout_marginEnd="@dimen/activity_margin"
+                android:hint="@string/description"
+                android:inputType="textCapSentences"
+                android:textColorHint="@color/inactive"
+                android:textColor="@color/dark_pink"
+                android:textCursorDrawable="@color/light_pink"
+                android:maxLength="180"
+                android:maxLines="1"
+                android:minEms="20"
+                android:padding="10dp"
+                android:background="@drawable/otp_box"
+                android:textSize="@dimen/day_text_size"
+                />
+
+            <ImageView
+                android:id="@+id/event_description_divider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@+id/update_Task_description"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:layout_marginBottom="@dimen/normal_margin"
+                android:background="@color/inactive"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/event_time_image"
+                android:layout_width="@dimen/smaller_icon_size"
+                android:layout_height="@dimen/smaller_icon_size"
+                android:layout_below="@+id/event_description_divider"
+                android:layout_alignTop="@+id/event_all_day_holder"
+                android:layout_alignBottom="@+id/event_all_day_holder"
+                android:layout_marginStart="@dimen/normal_margin"
+                android:padding="@dimen/medium_margin"
+                android:src="@drawable/clock"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:id="@+id/event_all_day_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/event_description_divider"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_toEndOf="@+id/event_time_image"
+                android:background="?attr/selectableItemBackground"
+                android:paddingTop="@dimen/medium_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingBottom="@dimen/medium_margin"
+                tools:ignore="MissingConstraints"
+                android:visibility="gone">
+
+                <!-- Replace MyAppCompatCheckbox with CheckBox -->
+                <CheckBox
+                    android:id="@+id/event_all_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:layoutDirection="rtl"
+                    android:text="All Day"
+                    android:textSize="@dimen/day_text_size" />
+            </RelativeLayout>
+
+            <!-- Replace MyTextView with TextView -->
+            <TextView
+                android:id="@+id/update_Task_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/event_time_image"
+                android:layout_alignStart="@+id/event_all_day_holder"
+                android:background="?attr/selectableItemBackground"
+                android:textColor="@color/black"
+                android:paddingTop="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingBottom="@dimen/activity_margin"
+                android:layout_marginStart="12dp"
+                android:textSize="@dimen/day_text_size"
+                tools:text="January 1 1970" />
+
+            <TextView
+                android:id="@+id/update_Task_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/event_time_image"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/medium_margin"
+                android:textColor="@color/black"
+                android:background="?attr/selectableItemBackground"
+                android:padding="@dimen/activity_margin"
+                android:textSize="@dimen/day_text_size"
+                tools:text="00:00" />
+
+
+            <ImageView
+                android:id="@+id/event_time_zone_divider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@+id/update_Task_date"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:background="@color/inactive"
+                android:importantForAccessibility="no" />
+
+
+            <!--add reminder-->
+            <ImageView
+                android:id="@+id/event_reminder_image"
+                android:layout_width="@dimen/smaller_icon_size"
+                android:layout_height="@dimen/smaller_icon_size"
+                android:layout_below="@+id/event_time_zone_divider"
+                android:layout_alignTop="@+id/event_reminder_1"
+                android:layout_alignBottom="@+id/event_reminder_1"
+                android:layout_marginStart="@dimen/normal_margin"
+                android:padding="@dimen/medium_margin"
+                android:src="@drawable/bell"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/event_reminder_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/event_time_zone_divider"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_toStartOf="@+id/event_reminder_1_type"
+                android:layout_toEndOf="@+id/event_reminder_image"
+                android:background="?attr/selectableItemBackground"
+                android:ellipsize="end"
+                android:lines="1"
+                android:paddingTop="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingBottom="@dimen/activity_margin"
+                android:textSize="@dimen/day_text_size"
+                tools:text="Add Another Reminder"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/event_reminder_1_type"
+                android:layout_width="@dimen/smaller_icon_size"
+                android:layout_height="@dimen/smaller_icon_size"
+                android:layout_alignTop="@+id/event_reminder_1"
+                android:layout_alignBottom="@+id/event_reminder_1"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/medium_margin"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/medium_margin"
+                android:src="@drawable/bell"
+                android:visibility="gone"/>
+
+
+            <!--   ADD ANOTHER REMINDER   -->
+            <TextView
+                android:id="@+id/event_reminder_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/event_reminder_1"
+                android:layout_alignStart="@+id/event_reminder_1"
+                android:layout_toStartOf="@+id/event_reminder_2_type"
+                android:alpha="0.4"
+                android:background="?attr/selectableItemBackground"
+                android:ellipsize="end"
+                android:lines="1"
+                android:paddingTop="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingBottom="@dimen/activity_margin"
+                android:text="@string/add_another_reminder"
+                android:textSize="@dimen/day_text_size"
+                tools:text="@string/add_another_reminder"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/event_reminder_2_type"
+                android:layout_width="@dimen/smaller_icon_size"
+                android:layout_height="@dimen/smaller_icon_size"
+                android:layout_alignTop="@+id/event_reminder_2"
+                android:layout_alignBottom="@+id/event_reminder_2"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/medium_margin"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/medium_margin"
+                android:src="@drawable/bell"
+                android:visibility="gone"/>
+
+            <!--    ADD ANOTHER REMINDER    -->
+            <TextView
+                android:id="@+id/event_reminder_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/event_reminder_2"
+                android:layout_alignStart="@+id/event_reminder_1"
+                android:layout_toStartOf="@+id/event_reminder_3_type"
+                android:alpha="0.4"
+                android:background="?attr/selectableItemBackground"
+                android:ellipsize="end"
+                android:lines="1"
+                android:paddingTop="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingBottom="@dimen/activity_margin"
+                android:text="@string/add_another_reminder"
+                android:textSize="@dimen/day_text_size"
+                tools:text="@string/add_another_reminder"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/event_reminder_3_type"
+                android:layout_width="@dimen/smaller_icon_size"
+                android:layout_height="@dimen/smaller_icon_size"
+                android:layout_alignTop="@+id/event_reminder_3"
+                android:layout_alignBottom="@+id/event_reminder_3"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/medium_margin"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/medium_margin"
+                android:src="@drawable/bell"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/event_reminder_divider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@+id/event_reminder_3"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:background="@color/inactive"
+                android:importantForAccessibility="no"
+                android:visibility="gone"/>
+
+            <!-- Repetation -->
+            <ImageView
+                android:id="@+id/event_repetition_image"
+                android:layout_width="@dimen/smaller_icon_size"
+                android:layout_height="@dimen/smaller_icon_size"
+                android:layout_below="@+id/event_time_zone_divider"
+                android:layout_alignTop="@+id/event_repetition"
+                android:layout_alignBottom="@+id/event_repetition"
+                android:layout_marginStart="@dimen/normal_margin"
+                android:padding="@dimen/medium_margin"
+                android:src="@drawable/repeat"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/event_repetition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/event_reminder_divider"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_toEndOf="@+id/event_repetition_image"
+                android:background="?attr/selectableItemBackground"
+                android:paddingTop="@dimen/normal_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingBottom="@dimen/normal_margin"
+                android:textSize="@dimen/day_text_size"
+                tools:text="No Repetition"
+                android:visibility="gone"/>
+
+            <!--    REPEAT ON        -->
+            <RelativeLayout
+                android:id="@+id/event_repetition_rule_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/event_repetition"
+                android:layout_alignStart="@+id/event_repetition"
+                android:background="?attr/selectableItemBackground"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/event_repetition_rule_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:paddingTop="@dimen/activity_margin"
+                    android:paddingBottom="@dimen/activity_margin"
+                    android:text="Repeat On"
+                    android:textSize="@dimen/day_text_size" />
+
+                <TextView
+                    android:id="@+id/event_repetition_rule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/event_repetition_rule_label"
+                    android:clickable="false"
+                    android:gravity="end"
+                    android:padding="@dimen/activity_margin"
+                    android:text="Every Day"
+                    android:textSize="@dimen/day_text_size" />
+            </RelativeLayout>
+
+            <!--    REPEAT TILL        -->
+            <RelativeLayout
+                android:id="@+id/event_repetition_limit_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/event_repetition_rule_holder"
+                android:layout_alignStart="@+id/event_repetition"
+                android:background="?attr/selectableItemBackground"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/event_repetition_limit_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/event_repetition_limit"
+                    android:clickable="false"
+                    android:paddingTop="@dimen/activity_margin"
+                    android:paddingBottom="@dimen/activity_margin"
+                    android:text="Repeat Till"
+                    android:textSize="@dimen/day_text_size" />
+
+                <TextView
+                    android:id="@+id/event_repetition_limit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:clickable="false"
+                    android:padding="@dimen/activity_margin"
+                    android:text="Forever"
+                    android:textSize="@dimen/day_text_size" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/event_repetition_divider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@+id/event_repetition_limit_holder"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@color/inactive"
+                android:importantForAccessibility="no"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

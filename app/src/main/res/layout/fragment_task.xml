@@ -2,276 +2,78 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout7"
+    android:id="@+id/fragment_task"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="@color/bgcolor"
-    tools:context=".HomePage.HomePageFragments.TaskFragment" >
+    android:background="@color/bgwhite"
+    tools:context=".HomePage.HomePageFragments.ActivityFragments.TaskFragment">
 
+    <!-- Main content layout -->
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        android:paddingHorizontal="20dp"
+        android:paddingStart="20dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.5">
 
-        <FrameLayout
+
+        <!-- Scrollable content -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Hi, "
-                        android:textColor="@color/burgundy"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/customerTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text=""
-                        android:textColor="@color/light_burgundy"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-
-
-                <TextView
-                    fontPath="fonts/nunito_extra_bold.ttf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="All Activities"
-                    android:textColor="@color/dark_pink"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    tools:ignore="MissingPrefix" />
-
-
-            </LinearLayout>
-
-        </FrameLayout>
-
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-       >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:paddingBottom="70dp">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="12dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp"
-                    app:contentPadding="10dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/myImageView"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_margin="16dp"
-                            android:clipToOutline="true"
-                            android:contentDescription="Task"
-                            android:src="@drawable/task_active"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/yourTask"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="36dp"
-                            android:text="Your task"
-                            android:textSize="24sp"
-                            app:layout_constraintStart_toEndOf="@+id/myImageView"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="36dp"
-                            android:orientation="horizontal"
-                            app:layout_constraintStart_toEndOf="@id/myImageView"
-                            app:layout_constraintTop_toBottomOf="@id/yourTask">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textSize="24sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="/"
-                                android:textSize="24sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textSize="24sp" />
-
-                        </LinearLayout>
-
-                        <Button
-                            android:id="@+id/taskViewBT"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/transparent"
-                            android:text="view"
-                            android:textSize="16sp"
-                            android:textColor="@color/burgundy"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
-
                 <FrameLayout
                     android:id="@+id/taskFL"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone"
-                    android:layout_marginTop="12dp">
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/noTaskTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="No Task to show."
+                        android:layout_marginTop="8dp"
+                        android:text="Add new Task."
+                        android:textColor="@color/black"
                         android:textSize="18sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/taskRecycler"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-
-                </FrameLayout>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="12dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp"
-                    app:contentPadding="10dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/myImageEvents"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_margin="16dp"
-                            android:clipToOutline="true"
-                            android:contentDescription="Task"
-                            android:src="@drawable/task_active"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/yourEvents"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="36dp"
-                            android:text="Events"
-                            android:textSize="30sp"
-                            app:layout_constraintStart_toEndOf="@+id/myImageEvents"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <Button
-                            android:id="@+id/eventViewBT"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/transparent"
-                            android:text="view"
-                            android:textSize="16sp"
-                            android:textColor="@color/burgundy"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <FrameLayout
-                    android:id="@+id/eventFL"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="12dp"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:id="@+id/noEventTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="No Event to show."
-                        android:textSize="18sp" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/eventRecycler"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
                 </FrameLayout>
 
             </LinearLayout>
-
         </ScrollView>
 
-
+        <!-- Floating Action Button -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:maxImageSize="30dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="@color/light_pink"
+            android:layout_gravity="end"
+            android:src="@drawable/add"/>
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
-        android:src="@drawable/add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="40dp"
-        android:backgroundTint="@color/light_pink"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

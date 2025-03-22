@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Task"
-        android:icon="@drawable/task_selector"
-        android:id="@+id/bnvTask" />
-
     <item android:title="Calendar"
         android:icon="@drawable/calendar_selector"
         android:id="@+id/bnvCalendar"/>
 
-    <item android:title="Study"
-        android:id="@+id/bnvStudy"
-        android:icon="@drawable/study_selector"/>
+    <item android:title="Task"
+        android:icon="@drawable/task_selector"
+        android:id="@+id/bnvTask" />
+
+<!--    <item android:title="Study"-->
+<!--        android:id="@+id/bnvStudy"-->
+<!--        android:icon="@drawable/study_selector"/>-->
 
     <item android:title="Profile"
         android:id="@+id/bnvProfile"

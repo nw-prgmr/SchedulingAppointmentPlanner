@@ -11,31 +11,65 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+
 import com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.CalendarFragments.DailyView;
 import com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.CalendarFragments.MonthlyView;
 import com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.CalendarFragments.WeekView;
 import com.antopina.schedulingappointmentplanner.R;
+import com.antopina.schedulingappointmentplanner.databinding.FragmentActivityBinding;
+import com.google.android.material.tabs.TabLayout;
 
 
 public class CalendarFragment extends Fragment{
 
+
     private Button btWeekly, btMonthly, btDaily;
+    private TabLayout tabLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        // Initialize buttons
-        btWeekly = view.findViewById(R.id.btWeekly);
-        btMonthly = view.findViewById(R.id.btMonthly);
-        btDaily = view.findViewById(R.id.btDailyly);
 
-        // Call the method to replace the fragment into the FrameLayout
+        // Initialize TabLayout
+        tabLayout = view.findViewById(R.id.tab_layout);
+
+        // Set default fragment
         replaceFragment(new MonthlyView());
-        btWeekly.setOnClickListener(v -> replaceFragment(new WeekView()));
-        btMonthly.setOnClickListener(v -> replaceFragment(new MonthlyView()));
-        btDaily.setOnClickListener(v -> replaceFragment(new DailyView()));
+
+        // Add tabs to TabLayout
+        tabLayout.addTab(tabLayout.newTab().setText("Monthly"));
+        tabLayout.addTab(tabLayout.newTab().setText("Weekly"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Daily"));
+
+        // Handle tab selection
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 0) {
+                    replaceFragment(new MonthlyView());
+                } else if (position == 1) {
+                    replaceFragment(new WeekView());
+                }
+//                else if (position == 2) {
+//                    replaceFragment(new DailyView());
+//                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // Do nothing
+            }
+        });
+
+
 
         return view;
 
@@ -49,4 +83,6 @@ public class CalendarFragment extends Fragment{
         fragmentTransaction.replace(R.id.calendar_frame_layout, fragment);
         fragmentTransaction.commit();
     }
+
+
 }

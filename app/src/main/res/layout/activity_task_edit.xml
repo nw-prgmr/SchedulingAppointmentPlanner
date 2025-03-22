@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgcolor"
     tools:context=".HomePage.calendar.TaskEdit">
 
     <include
@@ -23,37 +24,72 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/taskNameET"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/titleTV"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:layout_marginTop="12dp"
                 android:layout_marginStart="@dimen/activity_margin"
-                android:layout_marginTop="@dimen/activity_margin"
-                android:layout_marginEnd="@dimen/activity_margin"
-                android:hint="Title"
-                android:inputType="textCapSentences"
-                android:maxLength="180"
-                android:maxLines="1"
-                android:minEms="20"
-                android:textSize="@dimen/day_text_size"
+                android:textSize="18sp"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/task_description"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/taskNameET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/taskNameET"
+                android:layout_below="@id/titleTV"
                 android:layout_marginStart="@dimen/activity_margin"
-                android:layout_marginTop="@dimen/activity_margin"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="@dimen/activity_margin"
-                android:hint="Description"
+                android:background="@drawable/otp_box"
+                android:ems="10"
+                android:hint="@string/title"
+                android:textColor="@color/dark_pink"
+                android:textCursorDrawable="@color/light_pink"
+                android:cursorVisible="true"
                 android:inputType="textCapSentences"
                 android:maxLength="180"
                 android:maxLines="1"
-                android:minEms="20"
+                android:padding="10dp"
+                android:textColorHint="@color/inactive"
                 android:textSize="@dimen/day_text_size" />
+
+            <TextView
+                android:id="@+id/descriptionTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:text="@string/description"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_below="@+id/taskNameET"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/task_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/descriptionTV"
+                android:layout_marginStart="@dimen/activity_margin"
+                android:layout_marginEnd="@dimen/activity_margin"
+                android:hint="@string/description"
+                android:inputType="textCapSentences"
+                android:textColorHint="@color/inactive"
+                android:textColor="@color/dark_pink"
+                android:textCursorDrawable="@color/light_pink"
+                android:cursorVisible="true"
+                android:maxLength="180"
+                android:maxLines="1"
+                android:minEms="20"
+                android:padding="10dp"
+                android:background="@drawable/otp_box"
+                android:textSize="@dimen/day_text_size"
+                />
 
             <ImageView
                 android:id="@+id/event_description_divider"
@@ -74,7 +110,8 @@
                 android:layout_alignBottom="@+id/event_all_day_holder"
                 android:layout_marginStart="@dimen/normal_margin"
                 android:padding="@dimen/medium_margin"
-                android:src="@drawable/clock" />
+                android:src="@drawable/clock"
+                android:visibility="gone"/>
 
             <RelativeLayout
                 android:id="@+id/event_all_day_holder"
@@ -88,7 +125,8 @@
                 android:paddingTop="@dimen/medium_margin"
                 android:paddingEnd="@dimen/activity_margin"
                 android:paddingBottom="@dimen/medium_margin"
-                tools:ignore="MissingConstraints">
+                tools:ignore="MissingConstraints"
+                android:visibility="gone">
 
                 <!-- Replace MyAppCompatCheckbox with CheckBox -->
                 <CheckBox
@@ -110,9 +148,11 @@
                 android:layout_below="@+id/event_time_image"
                 android:layout_alignStart="@+id/event_all_day_holder"
                 android:background="?attr/selectableItemBackground"
+                android:textColor="@color/black"
                 android:paddingTop="@dimen/activity_margin"
                 android:paddingEnd="@dimen/activity_margin"
                 android:paddingBottom="@dimen/activity_margin"
+                android:layout_marginStart="12dp"
                 android:textSize="@dimen/day_text_size"
                 tools:text="January 1 1970" />
 
@@ -123,6 +163,7 @@
                 android:layout_below="@+id/event_time_image"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/medium_margin"
+                android:textColor="@color/black"
                 android:background="?attr/selectableItemBackground"
                 android:padding="@dimen/activity_margin"
                 android:textSize="@dimen/day_text_size"
@@ -150,7 +191,8 @@
                 android:layout_alignBottom="@+id/event_reminder_1"
                 android:layout_marginStart="@dimen/normal_margin"
                 android:padding="@dimen/medium_margin"
-                android:src="@drawable/bell" />
+                android:src="@drawable/bell"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/event_reminder_1"
@@ -167,7 +209,8 @@
                 android:paddingEnd="@dimen/activity_margin"
                 android:paddingBottom="@dimen/activity_margin"
                 android:textSize="@dimen/day_text_size"
-                tools:text="Add Another Reminder" />
+                tools:text="Add Another Reminder"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/event_reminder_1_type"
@@ -183,6 +226,8 @@
                 android:src="@drawable/bell"
                 android:visibility="gone"/>
 
+
+<!--   ADD ANOTHER REMINDER   -->
             <TextView
                 android:id="@+id/event_reminder_2"
                 android:layout_width="match_parent"
@@ -199,8 +244,8 @@
                 android:paddingBottom="@dimen/activity_margin"
                 android:text="@string/add_another_reminder"
                 android:textSize="@dimen/day_text_size"
-
-                tools:text="@string/add_another_reminder" />
+                tools:text="@string/add_another_reminder"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/event_reminder_2_type"
@@ -216,6 +261,7 @@
                 android:src="@drawable/bell"
                 android:visibility="gone"/>
 
+<!--    ADD ANOTHER REMINDER    -->
             <TextView
                 android:id="@+id/event_reminder_3"
                 android:layout_width="match_parent"
@@ -232,7 +278,8 @@
                 android:paddingBottom="@dimen/activity_margin"
                 android:text="@string/add_another_reminder"
                 android:textSize="@dimen/day_text_size"
-                tools:text="@string/add_another_reminder" />
+                tools:text="@string/add_another_reminder"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/event_reminder_3_type"
@@ -256,7 +303,8 @@
                 android:layout_marginTop="@dimen/medium_margin"
                 android:layout_marginBottom="@dimen/medium_margin"
                 android:background="@color/inactive"
-                android:importantForAccessibility="no" />
+                android:importantForAccessibility="no"
+                android:visibility="gone"/>
 
             <!-- Repetation -->
             <ImageView
@@ -268,7 +316,8 @@
                 android:layout_alignBottom="@+id/event_repetition"
                 android:layout_marginStart="@dimen/normal_margin"
                 android:padding="@dimen/medium_margin"
-                android:src="@drawable/repeat" />
+                android:src="@drawable/repeat"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/event_repetition"
@@ -282,15 +331,18 @@
                 android:paddingEnd="@dimen/activity_margin"
                 android:paddingBottom="@dimen/normal_margin"
                 android:textSize="@dimen/day_text_size"
-                tools:text="No Repetition" />
+                tools:text="No Repetition"
+                android:visibility="gone"/>
 
+<!--    REPEAT ON        -->
             <RelativeLayout
                 android:id="@+id/event_repetition_rule_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/event_repetition"
                 android:layout_alignStart="@+id/event_repetition"
-                android:background="?attr/selectableItemBackground">
+                android:background="?attr/selectableItemBackground"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/event_repetition_rule_label"
@@ -315,6 +367,7 @@
                     android:textSize="@dimen/day_text_size" />
             </RelativeLayout>
 
+<!--    REPEAT TILL        -->
             <RelativeLayout
                 android:id="@+id/event_repetition_limit_holder"
                 android:layout_width="match_parent"
@@ -322,7 +375,7 @@
                 android:layout_below="@+id/event_repetition_rule_holder"
                 android:layout_alignStart="@+id/event_repetition"
                 android:background="?attr/selectableItemBackground"
-                >
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/event_repetition_limit_label"
@@ -353,7 +406,8 @@
                 android:layout_below="@+id/event_repetition_limit_holder"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:background="@color/inactive"
-                android:importantForAccessibility="no" />
+                android:importantForAccessibility="no"
+                android:visibility="gone"/>
 
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

@@ -22,12 +22,15 @@ import com.antopina.schedulingappointmentplanner.R;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MonthlyView extends Fragment implements CalendarAdapter.OnItemListener {
 
-
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
+    private Map<LocalDate, List<String>> eventsMap; // Map to store events/tasks for each day
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,7 +38,7 @@ public class MonthlyView extends Fragment implements CalendarAdapter.OnItemListe
         View view = inflater.inflate(R.layout.fragment_monthly_view, container, false);
 
         try {
-            // Initialize widgets
+            // Initialize widgets and events data
             initWidgets(view);
 
             // Set initial date
@@ -67,7 +70,7 @@ public class MonthlyView extends Fragment implements CalendarAdapter.OnItemListe
             monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
             ArrayList<LocalDate> daysInMonth = daysInMonthArray();
 
-            // Initialize adapter with this as the listener
+            // Initialize adapter with events data
             CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this, getContext());
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
             calendarRecyclerView.setLayoutManager(layoutManager);
@@ -76,8 +79,6 @@ public class MonthlyView extends Fragment implements CalendarAdapter.OnItemListe
             showErrorToast("Failed to update the calendar view.");
         }
     }
-
-
 
     private void previousMonthAction() {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
@@ -93,6 +94,7 @@ public class MonthlyView extends Fragment implements CalendarAdapter.OnItemListe
     public void onItemClick(int position, LocalDate date) {
         if (date != null) {
             CalendarUtils.selectedDate = date;
+//            Toast.makeText(getContext(), "Selected: " + date.toString(), Toast.LENGTH_SHORT).show();
             setMonthView();
         }
     }

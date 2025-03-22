@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.TaskFragment;
+import com.antopina.schedulingappointmentplanner.HomePage.HomePageFragments.ActivityFragments.TaskFragment;
 import com.antopina.schedulingappointmentplanner.R;
 import com.antopina.schedulingappointmentplanner.model.TodoModel;
 import com.antopina.schedulingappointmentplanner.utils.DataBaseHelper;

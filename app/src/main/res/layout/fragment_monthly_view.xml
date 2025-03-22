@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout8"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgcolor"
     tools:context=".HomePage.HomePageFragments.CalendarFragments.MonthlyView">
 
     <LinearLayout
@@ -22,13 +23,15 @@
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
+
             <Button
                 android:id="@+id/btnPreviousMonth"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:text="@string/back"
+                android:text=""
+                android:drawableLeft="@drawable/ic_back"
                 android:textColor="@color/burgundy"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -39,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="September 2001"
+                android:textColor="@color/black"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -48,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:text="@string/next"
+                android:text=""
+                android:drawableEnd="@drawable/ic_next"
                 android:textColor="@color/burgundy"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -58,7 +63,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -66,7 +72,7 @@
                 android:layout_weight="1"
                 android:text="SUN"
                 android:textAlignment="center"
-                android:textColor="@color/inactive"
+                android:textColor="@color/secondary_burgundy"
                 android:textSize="16sp" />
 
             <TextView
@@ -75,7 +81,7 @@
                 android:layout_weight="1"
                 android:text="MON"
                 android:textAlignment="center"
-                android:textColor="@color/inactive"
+                android:textColor="@color/secondary_burgundy"
                 android:textSize="16sp" />
 
             <TextView
@@ -84,7 +90,7 @@
                 android:layout_weight="1"
                 android:text="TUE"
                 android:textAlignment="center"
-                android:textColor="@color/inactive"
+                android:textColor="@color/secondary_burgundy"
                 android:textSize="16sp" />
 
             <TextView
@@ -93,7 +99,7 @@
                 android:layout_weight="1"
                 android:text="WED"
                 android:textAlignment="center"
-                android:textColor="@color/inactive"
+                android:textColor="@color/secondary_burgundy"
                 android:textSize="16sp" />
 
             <TextView
@@ -102,7 +108,7 @@
                 android:layout_weight="1"
                 android:text="THU"
                 android:textAlignment="center"
-                android:textColor="@color/inactive"
+                android:textColor="@color/secondary_burgundy"
                 android:textSize="16sp" />
 
             <TextView
@@ -111,7 +117,7 @@
                 android:layout_weight="1"
                 android:text="FRI"
                 android:textAlignment="center"
-                android:textColor="@color/inactive"
+                android:textColor="@color/secondary_burgundy"
                 android:textSize="16sp" />
 
             <TextView
@@ -120,15 +126,15 @@
                 android:layout_weight="1"
                 android:text="SAT"
                 android:textAlignment="center"
-                android:textColor="@color/inactive"
+                android:textColor="@color/secondary_burgundy"
                 android:textSize="16sp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvcalendar"
-            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/white" />
 
     </LinearLayout>
 
